@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "realrails",
+  "name": "RealRails",
+  "description": "Adds a better rail system to minecraft.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Jeffrey Santi"],
+  "credits": "Jeffrey Santi, Forge/FML Team, MCP Team",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

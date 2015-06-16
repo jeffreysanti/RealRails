@@ -19,7 +19,7 @@ public class ItemTrackMarker extends Item {
 	public ItemTrackMarker()
 	{
 		GameRegistry.registerItem(this, name);
-		setUnlocalizedName(RealRails.MODID + "_" + name);
+		setUnlocalizedName(RealRails.MODID + ":" + name);
 		setCreativeTab(CreativeTabs.tabMisc);
 	}
 	

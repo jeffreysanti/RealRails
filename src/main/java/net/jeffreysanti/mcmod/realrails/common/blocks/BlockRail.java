@@ -67,7 +67,7 @@ public class BlockRail extends BlockContainer {
 	public BlockRail() {
 		super(Material.iron);
 		GameRegistry.registerBlock(this, name);
-		setUnlocalizedName(RealRails.MODID + "_" + name);
+		setUnlocalizedName(RealRails.MODID + ":" + name);
 		setCreativeTab(CreativeTabs.tabMisc);
 		this.setHardness(10.0f);
 		
