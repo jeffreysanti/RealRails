@@ -64,7 +64,6 @@ public class BlockModelRail implements IModel {
     public ResourceLocation textureFromData(int railElem, int railStyle){
     	String path = RealRails.MODID+":blocks/rails/";
     	path += RailRegistry.getTextureName(railStyle, railElem);
-    	System.out.println(path + " ::: "+railElem + " / "+railStyle);
     	return new ResourceLocation(path);
     }
 

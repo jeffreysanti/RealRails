@@ -35,6 +35,8 @@ public class CustomModelLoader implements ICustomModelLoader {
         String r = l.getResourcePath().substring("models/block/builtin/".length());
         if(r.equals("rail")) {
             return new BlockModelRail(resourceManager);
+        }else if(r.equals("ramp")) {
+            return new BlockModelRamp(resourceManager);
         }
         throw new RuntimeException("A builtin model '" + r + "' is not defined.");
     }

@@ -18,11 +18,13 @@ public class RealRailsClientProxy extends RealRailsCommonProxy {
 		
 		// BLOCKS
 		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
+		
     	renderItem.getItemModelMesher().register(Item.getItemFromBlock(BlockRegistry.blockRail), 0, new ModelResourceLocation(RealRails.MODID + ":" + BlockRegistry.blockRail.getName(), "inventory"));
+    	renderItem.getItemModelMesher().register(Item.getItemFromBlock(BlockRegistry.blockRamp), 0, new ModelResourceLocation(RealRails.MODID + ":" + BlockRegistry.blockRamp.getName(), "inventory"));
 	
+    	
     	// ITEMS
-		renderItem = Minecraft.getMinecraft().getRenderItem();
     	renderItem.getItemModelMesher().register(ItemRegistry.itemTrackMarker, 0, new ModelResourceLocation(RealRails.MODID + ":" + ItemRegistry.itemTrackMarker.getName(), "inventory"));
-
+    	renderItem.getItemModelMesher().register(ItemRegistry.itemRampMarker, 0, new ModelResourceLocation(RealRails.MODID + ":" + ItemRegistry.itemRampMarker.getName(), "inventory"));
 	}
 }

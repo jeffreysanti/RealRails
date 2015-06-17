@@ -1,6 +1,7 @@
 package net.jeffreysanti.mcmod.realrails;
 
 import net.jeffreysanti.mcmod.realrails.common.RailRegistry;
+import net.jeffreysanti.mcmod.realrails.common.RampRegistry;
 import net.jeffreysanti.mcmod.realrails.common.RealRailsCommonProxy;
 import net.jeffreysanti.mcmod.realrails.common.items.ItemTrackMarker;
 import net.minecraft.client.Minecraft;
@@ -29,6 +30,7 @@ public class RealRails
     {
     	
     	RailRegistry.init();
+    	RampRegistry.init();
     	
     	ItemRegistry.preInit(event);
     	BlockRegistry.preInit(event);
