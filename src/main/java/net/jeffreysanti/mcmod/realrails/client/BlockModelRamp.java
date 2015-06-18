@@ -49,22 +49,22 @@ public class BlockModelRamp implements IModel {
 
     @Override
     public Collection<ResourceLocation> getTextures() {
-    	//HashSet<String> texs = RailRegistry.allTextureNames();
+    	Collection<String> texs = RampRegistry.getAllStyles();
     	ArrayList<ResourceLocation> finalTexs = new ArrayList();
     	finalTexs.add(TBreak);
     	
-    	//for(String s : texs){
-    	//	finalTexs.add(new ResourceLocation(RealRails.MODID+":blocks/rails/"+s));
-    	//}
+    	for(String s : texs){
+    		finalTexs.add(new ResourceLocation(s));
+    	}
     	
         return finalTexs;
     }
     
     public static ResourceLocation textureFromData(int rampType, int rampStyle){
-    	//String path = RealRails.MODID+":blocks/rails/";
-    	//path += RailRegistry.getTextureName(railStyle, railElem);
-    	//return new ResourceLocation(path);
-    	return TBreak;
+    	String path = RampRegistry.getStyle(rampStyle);
+    	if(path.isEmpty())
+    		return TBreak;
+    	return new ResourceLocation(path);
     }
 
     

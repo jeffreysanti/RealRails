@@ -27,17 +27,26 @@ public class CustomModelLoader implements ICustomModelLoader {
 
     @Override
     public boolean accepts(ResourceLocation l) {
-        return l.getResourceDomain().equals(RealRails.MODID) && l.getResourcePath().startsWith("models/block/builtin/");
+    	if(l.getResourceDomain().equals(RealRails.MODID)){
+    		System.out.println(l.getResourcePath());
+    		return 	l.getResourcePath().startsWith("models/block/builtin/") ||
+    				l.getResourcePath().startsWith("models/item/rampitm");
+    	}
+    	return false;
     }
 
     @Override
     public IModel loadModel(ResourceLocation l) {
-        String r = l.getResourcePath().substring("models/block/builtin/".length());
-        if(r.equals("rail")) {
-            return new BlockModelRail(resourceManager);
-        }else if(r.equals("ramp")) {
-            return new BlockModelRamp(resourceManager);
-        }
-        throw new RuntimeException("A builtin model '" + r + "' is not defined.");
+    	if(l.getResourcePath().contains("models/block/builtin/")){
+    		String r = l.getResourcePath().substring("models/block/builtin/".length());
+            if(r.equals("rail")) {
+                return new BlockModelRail(resourceManager);
+            }else if(r.equals("ramp")) {
+                return new BlockModelRamp(resourceManager);
+            }
+    	}else if(l.getResourcePath().contains("models/item/rampitm_")){
+			return new ItemModelRamp(resourceManager);
+    	}
+        throw new RuntimeException("A builtin model '" + l.getResourcePath() + "' is not defined.");
     }
 }

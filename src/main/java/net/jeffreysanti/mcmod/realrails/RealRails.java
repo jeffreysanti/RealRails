@@ -28,6 +28,7 @@ public class RealRails
     @EventHandler
     public void preinit(FMLPreInitializationEvent event)
     {
+    	proxy.registerModelLoaders();
     	
     	RailRegistry.init();
     	RampRegistry.init();
@@ -39,9 +40,9 @@ public class RealRails
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+    	proxy.registerRenders();
+    	
     	ItemRegistry.init(event);
     	BlockRegistry.init(event);
-    	
-    	proxy.registerRenders();
     }
 }

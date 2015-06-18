@@ -13,27 +13,35 @@ public class RailRegistry {
 		G.clear();
 		
 		// styles {path, id, supports45/135}
-		styleToList(new RailStyle("", 1, true)); // default
+		styleToList(new RailStyle("", 1, true, true)); // default
 		
 		
 		// rails {name, id, 45/135}
-		railToList(new RailPiece("std_0_a", 1, false));
-		railToList(new RailPiece("std_0_b", 2, false));
+		railToList(new RailPiece("std_0_a", 1, false, false));
+		railToList(new RailPiece("std_0_b", 2, false, false));
 		groupToList(new RailPieceGroup("std_0", new int[][]{ {1} , {2} }));
 		
-		railToList(new RailPiece("std_90_a", 3, false));
-		railToList(new RailPiece("std_90_b", 4, false));
+		railToList(new RailPiece("std_90_a", 3, false, false));
+		railToList(new RailPiece("std_90_b", 4, false, false));
 		groupToList(new RailPieceGroup("std_90", new int[][]{ {3, 4} }));
 		
-		railToList(new RailPiece("std_45_a", 5, true));
-		railToList(new RailPiece("std_45_b", 6, true));
-		railToList(new RailPiece("std_45_c", 7, true));
+		railToList(new RailPiece("std_45_a", 5, true, false));
+		railToList(new RailPiece("std_45_b", 6, true, false));
+		railToList(new RailPiece("std_45_c", 7, true, false));
 		groupToList(new RailPieceGroup("std_45", new int[][]{ {5, 6, 7} }));
 		
-		railToList(new RailPiece("std_135_a", 8, true));
-		railToList(new RailPiece("std_135_b", 9, true));
-		railToList(new RailPiece("std_135_c", 10, true));
+		railToList(new RailPiece("std_135_a", 8, true, false));
+		railToList(new RailPiece("std_135_b", 9, true, false));
+		railToList(new RailPiece("std_135_c", 10, true, false));
 		groupToList(new RailPieceGroup("std_135", new int[][]{ {10, 9, 8} }));
+		
+		railToList(new RailPiece("inc_0_a", 11, false, true));
+		railToList(new RailPiece("inc_0_b", 12, false, true));
+		groupToList(new RailPieceGroup("inc_0", new int[][]{ {11} , {12} }));
+		
+		railToList(new RailPiece("inc_90_a", 13, false, true));
+		railToList(new RailPiece("inc_90_b", 14, false, true));
+		groupToList(new RailPieceGroup("inc_90", new int[][]{ {13, 14} }));
 		
 	}
 	
@@ -69,9 +77,12 @@ public class RailRegistry {
 		for(RailStyle s : S.values()){
 			String prefix = s.getName();
 			boolean b45135 = s.doesSupports45_135();
+			boolean bincline = s.doesSupportIncline();
 			
 			for(RailPiece r : E.values()){
 				if(!b45135 && r.is45_135())
+					continue;
+				if(!bincline && r.isInclined())
 					continue;
 				
 				

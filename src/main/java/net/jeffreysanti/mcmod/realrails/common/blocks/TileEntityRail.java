@@ -5,6 +5,7 @@ import net.jeffreysanti.mcmod.realrails.RealRails;
 import net.jeffreysanti.mcmod.realrails.common.RailPiece;
 import net.jeffreysanti.mcmod.realrails.common.RailPieceGroup;
 import net.jeffreysanti.mcmod.realrails.common.RailRegistry;
+import net.jeffreysanti.mcmod.realrails.common.RampRegistry;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -22,6 +23,8 @@ public class TileEntityRail extends TileEntity {
 		
 		elmID = 1;
 		styleID = 1;
+		rampType = 1;
+    	rampStyle = 1;
 	}
 	
 	@Override
@@ -37,6 +40,17 @@ public class TileEntityRail extends TileEntity {
         	this.elmID = 1;
         	this.styleID = 1;
     	}
+        if(RailRegistry.getPiece(this.elmID).isInclined()){
+        	this.rampType = tagCompound.getInteger("rampType");
+        	this.rampStyle = tagCompound.getInteger("rampStyle");
+        	
+        	if(RampRegistry.getRamp(this.rampType) == null){
+            	this.rampType = 1;
+            }
+            if(RampRegistry.getStyle(this.rampStyle).isEmpty()){
+            	this.rampStyle = 1;
+            }
+        }
 	}
    
     @Override
@@ -47,6 +61,11 @@ public class TileEntityRail extends TileEntity {
     private void writeSyncData(NBTTagCompound tagCompound){
     	tagCompound.setInteger("elmID", this.elmID);
         tagCompound.setInteger("styleID", this.styleID);
+        
+        if(RailRegistry.getPiece(this.elmID).isInclined()){
+        	tagCompound.setInteger("rampType", this.rampType);
+            tagCompound.setInteger("rampStyle", this.rampStyle);
+        }
 	}
     
     @Override
@@ -75,6 +94,13 @@ public class TileEntityRail extends TileEntity {
     	return styleID;
     }
     
+    public int getRampType(){
+    	return rampType;
+    }
+    public int getRampStyle(){
+    	return rampStyle;
+    }
+    
     public void setRailID(int i){
     	if(!RailRegistry.getTextureName(styleID, i).isEmpty()){
     		elmID = i;
@@ -85,6 +111,18 @@ public class TileEntityRail extends TileEntity {
     	if(!RailRegistry.getTextureName(i, elmID).isEmpty()){
     		styleID = i;
     	}
+    }
+    
+    public void setRampType(int i){
+    	if(RampRegistry.getRamp(i) != null){
+    		rampType = i;
+    	}
+    }
+    
+    public void setRampStyle(int i){
+    	if(!RampRegistry.getStyle(this.styleID).isEmpty()){
+    		rampStyle = i;
+        }
     }
     
     public void onBreak(World worldIn, BlockPos pos, IBlockState state){
@@ -104,6 +142,9 @@ public class TileEntityRail extends TileEntity {
     
     private int elmID;
     private int styleID;
+    
+    private int rampType;
+    private int rampStyle;
 	
     private static final String name = "rail";
 	public static void register(){

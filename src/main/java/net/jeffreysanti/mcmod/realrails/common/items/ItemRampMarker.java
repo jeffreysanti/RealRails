@@ -33,20 +33,33 @@ public class ItemRampMarker extends Item {
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-		if(!(worldIn.getBlockState(pos).getBlock() instanceof BlockRamp)){
-			return true;
+		if(worldIn.getBlockState(pos).getBlock() instanceof BlockRamp){
+			TileEntityRamp ent = (TileEntityRamp)worldIn.getTileEntity(pos);
+			if(ent == null){
+				return true;
+			}
+			if(playerIn.isSneaking()){
+				ent.setTypeID(ent.getTypeID() -1);
+			}else{
+				ent.setTypeID(ent.getTypeID() +1);
+			}
+			Minecraft.getMinecraft().thePlayer.sendChatMessage("ID:" + ent.getTypeID() + " / Style:"+ent.getStyleID());
+			ent.syncTileEntity();
+			return false;
+		}else if(worldIn.getBlockState(pos).getBlock() instanceof BlockRail){
+			TileEntityRail ent = (TileEntityRail)worldIn.getTileEntity(pos);
+			if(ent == null){
+				return true;
+			}
+			if(playerIn.isSneaking()){
+				ent.setRampType(ent.getRampType() -1);
+			}else{
+				ent.setRampType(ent.getRampType() +1);
+			}
+			ent.syncTileEntity();
+			return false;
 		}
-		TileEntityRamp ent = (TileEntityRamp)worldIn.getTileEntity(pos);
-		if(ent == null){
-			return true;
-		}
-		if(playerIn.isSneaking()){
-			ent.setTypeID(ent.getTypeID() -1);
-		}else{
-			ent.setTypeID(ent.getTypeID() +1);
-		}
-		Minecraft.getMinecraft().thePlayer.sendChatMessage("ID:" + ent.getTypeID() + " / Style:"+ent.getStyleID());
-		ent.syncTileEntity();
-		return false;
+		
+		return true;
     }
 }

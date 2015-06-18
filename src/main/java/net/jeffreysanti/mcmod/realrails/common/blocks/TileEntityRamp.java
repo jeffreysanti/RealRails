@@ -36,8 +36,9 @@ public class TileEntityRamp extends TileEntity {
         if(RampRegistry.getRamp(this.typeID) == null){
         	this.typeID = 1;
         }
-        // TODO: Check Style ID
-    	this.styleID = 1;
+        if(RampRegistry.getStyle(this.styleID).isEmpty()){
+        	this.styleID = 1;
+        }
 	}
    
     @Override
@@ -83,9 +84,9 @@ public class TileEntityRamp extends TileEntity {
     }
     
     public void setStyleID(int i){
-    	//if(!RailRegistry.getTextureName(i, elmID).isEmpty()){
+    	if(!RampRegistry.getStyle(this.styleID).isEmpty()){
     		styleID = i;
-    	//}
+        }
     }
     
     

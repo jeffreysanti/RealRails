@@ -60,6 +60,44 @@ public class BlockRail extends BlockContainer {
 	        return value.toString();
 	    }
     };
+    
+    public static final IUnlistedProperty<Integer> UP_RAMPTYPE = new IUnlistedProperty<Integer>() {
+	    @Override
+	    public String getName() {
+	        return "rail.ramptype";
+	    }
+	    @Override
+	    public boolean isValid(Integer value) {
+	        return true;
+	    }
+	    @Override
+	    public Class<Integer> getType() {
+	        return Integer.class;
+	    }
+	    @Override
+	    public String valueToString(Integer value) {
+	        return value.toString();
+	    }
+    };
+    
+    public static final IUnlistedProperty<Integer> UP_RAMPSTYLE = new IUnlistedProperty<Integer>() {
+	    @Override
+	    public String getName() {
+	        return "rail.rampstyle";
+	    }
+	    @Override
+	    public boolean isValid(Integer value) {
+	        return true;
+	    }
+	    @Override
+	    public Class<Integer> getType() {
+	        return Integer.class;
+	    }
+	    @Override
+	    public String valueToString(Integer value) {
+	        return value.toString();
+	    }
+    };
 	
 	
 	private final String name = "rail";
@@ -86,7 +124,8 @@ public class BlockRail extends BlockContainer {
 	
 	@Override
     protected BlockState createBlockState() {
-        return new ExtendedBlockState(this, new IProperty[] {  }, new IUnlistedProperty[]{ UP_ELEM, UP_STYLE });
+        return new ExtendedBlockState(this, new IProperty[] {  }, 
+        		new IUnlistedProperty[]{ UP_ELEM, UP_STYLE, UP_RAMPTYPE, UP_RAMPSTYLE });
     }
 
     @Override
@@ -98,7 +137,9 @@ public class BlockRail extends BlockContainer {
         	}
             return ((IExtendedBlockState)state)
             		.withProperty(UP_ELEM, te.getRailID())
-            		.withProperty(UP_STYLE, te.getStyleID());
+            		.withProperty(UP_STYLE, te.getStyleID())
+            		.withProperty(UP_RAMPTYPE, te.getRampType())
+            		.withProperty(UP_RAMPSTYLE, te.getRampStyle());
         }
         return state;
     }

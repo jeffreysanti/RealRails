@@ -7,7 +7,11 @@ import com.google.common.base.Function;
 import com.google.common.primitives.Ints;
 
 import net.jeffreysanti.mcmod.realrails.RealRails;
+import net.jeffreysanti.mcmod.realrails.common.RailPiece;
 import net.jeffreysanti.mcmod.realrails.common.RailRegistry;
+import net.jeffreysanti.mcmod.realrails.common.RampPiece;
+import net.jeffreysanti.mcmod.realrails.common.RampPiece.FACING;
+import net.jeffreysanti.mcmod.realrails.common.RampRegistry;
 import net.jeffreysanti.mcmod.realrails.common.blocks.BlockRail;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -58,6 +62,12 @@ public class BlockModelRail implements IModel {
     		finalTexs.add(new ResourceLocation(RealRails.MODID+":blocks/rails/"+s));
     	}
     	
+    	// need all ramp textures also:
+    	Collection<String> texsRamps = RampRegistry.getAllStyles();
+    	for(String s : texsRamps){
+    		finalTexs.add(new ResourceLocation(s));
+    	}
+    	
         return finalTexs;
     }
     
@@ -77,22 +87,64 @@ public class BlockModelRail implements IModel {
         		
         		int railElem = 1;
         		int railStyle = 1;
+        		int rampType = 1;
+        		int rampStyle = 1;
                 if(state instanceof IExtendedBlockState) {
                 	IExtendedBlockState ns = (IExtendedBlockState)state;
                 	if(ns.getValue(BlockRail.UP_ELEM) != null && ns.getValue(BlockRail.UP_STYLE) != null){
                 		railElem = ((IExtendedBlockState)state).getValue(BlockRail.UP_ELEM);
                 		railStyle = ((IExtendedBlockState)state).getValue(BlockRail.UP_STYLE);
+                		rampType = ((IExtendedBlockState)state).getValue(BlockRail.UP_RAMPTYPE);
+                		rampStyle = ((IExtendedBlockState)state).getValue(BlockRail.UP_RAMPSTYLE);
                 	}
                 }
                 ResourceLocation texture = textureFromData(railElem, railStyle);
-        		
-        		int[] ftop = Ints.concat(
-        				vertexToInts(1,0.125f,1, Color.WHITE.getRGB(), getTexture(texture), 16, 16),
-        				vertexToInts(1,0.125f,0, Color.WHITE.getRGB(), getTexture(texture), 16, 0),
-        				vertexToInts(0,0.125f,0, Color.WHITE.getRGB(), getTexture(texture), 0,  0),
-        				vertexToInts(0,0.125f,1, Color.WHITE.getRGB(), getTexture(texture), 0,  16));
-        		
-        		b.addGeneralQuad(new BakedQuad(ftop, 0, EnumFacing.UP));
+                
+                RailPiece p = RailRegistry.getPiece(railElem);
+                if(p.isInclined() && RampRegistry.getRamp(rampType) != null){
+                	RampPiece r = RampRegistry.getRamp(rampType);
+                	
+                	// build ramp mesh
+                	BlockModelRamp.buildRampMesh(b, rampType, rampStyle, textureGetter);
+                	
+                	if(r.getFacing() == FACING.RAMP_EAST){
+	                	int[] ftop = Ints.concat(
+		        				vertexToInts(1,r.getMaxY()+0.125f,1, Color.WHITE.getRGB(), getTexture(texture), 16, 16),
+		        				vertexToInts(1,r.getMaxY()+0.125f,0, Color.WHITE.getRGB(), getTexture(texture), 16, 0),
+		        				vertexToInts(0,r.getMinY()+0.125f,0, Color.WHITE.getRGB(), getTexture(texture), 0,  0),
+		        				vertexToInts(0,r.getMinY()+0.125f,1, Color.WHITE.getRGB(), getTexture(texture), 0,  16));
+	                	b.addGeneralQuad(new BakedQuad(ftop, 0, EnumFacing.UP));
+                	}else if(r.getFacing() == FACING.RAMP_WEST){
+                		int[] ftop = Ints.concat(
+		        				vertexToInts(1,r.getMinY()+0.125f,1, Color.WHITE.getRGB(), getTexture(texture), 16, 16),
+		        				vertexToInts(1,r.getMinY()+0.125f,0, Color.WHITE.getRGB(), getTexture(texture), 16, 0),
+		        				vertexToInts(0,r.getMaxY()+0.125f,0, Color.WHITE.getRGB(), getTexture(texture), 0,  0),
+		        				vertexToInts(0,r.getMaxY()+0.125f,1, Color.WHITE.getRGB(), getTexture(texture), 0,  16));
+                		b.addGeneralQuad(new BakedQuad(ftop, 0, EnumFacing.UP));
+                	}else if(r.getFacing() == FACING.RAMP_SOUTH){
+                		int[] ftop = Ints.concat(
+		        				vertexToInts(1,r.getMaxY()+0.125f,1, Color.WHITE.getRGB(), getTexture(texture), 16, 16),
+		        				vertexToInts(1,r.getMinY()+0.125f,0, Color.WHITE.getRGB(), getTexture(texture), 16, 0),
+		        				vertexToInts(0,r.getMinY()+0.125f,0, Color.WHITE.getRGB(), getTexture(texture), 0,  0),
+		        				vertexToInts(0,r.getMaxY()+0.125f,1, Color.WHITE.getRGB(), getTexture(texture), 0,  16));
+                		b.addGeneralQuad(new BakedQuad(ftop, 0, EnumFacing.UP));
+                	}else{ // NORTH
+                		int[] ftop = Ints.concat(
+		        				vertexToInts(1,r.getMinY()+0.125f,1, Color.WHITE.getRGB(), getTexture(texture), 16, 16),
+		        				vertexToInts(1,r.getMaxY()+0.125f,0, Color.WHITE.getRGB(), getTexture(texture), 16, 0),
+		        				vertexToInts(0,r.getMaxY()+0.125f,0, Color.WHITE.getRGB(), getTexture(texture), 0,  0),
+		        				vertexToInts(0,r.getMinY()+0.125f,1, Color.WHITE.getRGB(), getTexture(texture), 0,  16));
+                		b.addGeneralQuad(new BakedQuad(ftop, 0, EnumFacing.UP));
+                	}
+                }else{
+	        		int[] ftop = Ints.concat(
+	        				vertexToInts(1,0.125f,1, Color.WHITE.getRGB(), getTexture(texture), 16, 16),
+	        				vertexToInts(1,0.125f,0, Color.WHITE.getRGB(), getTexture(texture), 16, 0),
+	        				vertexToInts(0,0.125f,0, Color.WHITE.getRGB(), getTexture(texture), 0,  0),
+	        				vertexToInts(0,0.125f,1, Color.WHITE.getRGB(), getTexture(texture), 0,  16));
+	        		
+	        		b.addGeneralQuad(new BakedQuad(ftop, 0, EnumFacing.UP));
+                }
         		
         		return b.makeBakedModel();
         	}
