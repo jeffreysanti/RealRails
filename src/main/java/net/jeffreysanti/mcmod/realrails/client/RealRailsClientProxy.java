@@ -3,7 +3,10 @@ package net.jeffreysanti.mcmod.realrails.client;
 import net.jeffreysanti.mcmod.realrails.BlockRegistry;
 import net.jeffreysanti.mcmod.realrails.ItemRegistry;
 import net.jeffreysanti.mcmod.realrails.RealRails;
+import net.jeffreysanti.mcmod.realrails.common.RampRegistry;
+import net.jeffreysanti.mcmod.realrails.common.RampStyle;
 import net.jeffreysanti.mcmod.realrails.common.RealRailsCommonProxy;
+import net.jeffreysanti.mcmod.realrails.common.items.ItemRamp;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -36,6 +39,9 @@ public class RealRailsClientProxy extends RealRailsCommonProxy {
     	renderItem.getItemModelMesher().register(ItemRegistry.itemRampMarker, 0, new ModelResourceLocation(RealRails.MODID + ":" + ItemRegistry.itemRampMarker.getName(), "inventory"));
     	renderItem.getItemModelMesher().register(ItemRegistry.itemRampStyler, 0, new ModelResourceLocation(RealRails.MODID + ":" + ItemRegistry.itemRampStyler.getName(), "inventory"));
     	
-    	renderItem.getItemModelMesher().register(ItemRegistry.itemRamp1, 0, new ModelResourceLocation(RealRails.MODID + ":" + ItemRegistry.itemRamp1.getName(), "inventory"));
+    	renderItem.getItemModelMesher().register(ItemRegistry.itemRampBase, 0, new ModelResourceLocation(RealRails.MODID + ":" + ItemRegistry.itemRampBase.getName(), "inventory"));
+    	for(ItemRamp r : ItemRegistry.itemRamps){
+    		renderItem.getItemModelMesher().register(r, 0, new ModelResourceLocation(RealRails.MODID + ":" + r.getName(), "inventory"));
+		}
 	}
 }

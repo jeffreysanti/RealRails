@@ -63,7 +63,7 @@ public class BlockModelRail implements IModel {
     	}
     	
     	// need all ramp textures also:
-    	Collection<String> texsRamps = RampRegistry.getAllStyles();
+    	Collection<String> texsRamps = RampRegistry.getAllStyleTextures();
     	for(String s : texsRamps){
     		finalTexs.add(new ResourceLocation(s));
     	}

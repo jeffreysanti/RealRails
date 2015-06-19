@@ -28,7 +28,7 @@ public class CustomModelLoader implements ICustomModelLoader {
     @Override
     public boolean accepts(ResourceLocation l) {
     	if(l.getResourceDomain().equals(RealRails.MODID)){
-    		System.out.println(l.getResourcePath());
+    		//System.out.println(l.getResourcePath());
     		return 	l.getResourcePath().startsWith("models/block/builtin/") ||
     				l.getResourcePath().startsWith("models/item/rampitm");
     	}

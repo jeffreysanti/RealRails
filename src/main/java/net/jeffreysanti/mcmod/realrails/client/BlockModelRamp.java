@@ -49,7 +49,7 @@ public class BlockModelRamp implements IModel {
 
     @Override
     public Collection<ResourceLocation> getTextures() {
-    	Collection<String> texs = RampRegistry.getAllStyles();
+    	Collection<String> texs = RampRegistry.getAllStyleTextures();
     	ArrayList<ResourceLocation> finalTexs = new ArrayList();
     	finalTexs.add(TBreak);
     	
@@ -61,7 +61,7 @@ public class BlockModelRamp implements IModel {
     }
     
     public static ResourceLocation textureFromData(int rampType, int rampStyle){
-    	String path = RampRegistry.getStyle(rampStyle);
+    	String path = RampRegistry.getStyleTexture(rampStyle);
     	if(path.isEmpty())
     		return TBreak;
     	return new ResourceLocation(path);

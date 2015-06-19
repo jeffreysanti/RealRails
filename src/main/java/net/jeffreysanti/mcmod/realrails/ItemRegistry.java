@@ -1,5 +1,9 @@
 package net.jeffreysanti.mcmod.realrails;
 
+import java.util.ArrayList;
+
+import net.jeffreysanti.mcmod.realrails.common.RampRegistry;
+import net.jeffreysanti.mcmod.realrails.common.RampStyle;
 import net.jeffreysanti.mcmod.realrails.common.items.ItemRamp;
 import net.jeffreysanti.mcmod.realrails.common.items.ItemRampMarker;
 import net.jeffreysanti.mcmod.realrails.common.items.ItemRampStyler;
@@ -14,16 +18,35 @@ public class ItemRegistry {
 	public static ItemRampMarker itemRampMarker;
 	public static ItemRampStyler itemRampStyler;
 	
-	public static ItemRamp itemRamp1;
+	public static ItemRamp itemRampBase;
+	public static ArrayList<ItemRamp> itemRamps = new ArrayList();
 	
 	static void preInit(FMLPreInitializationEvent event){
 		itemTrackMarker = new ItemTrackMarker();
 		itemRampMarker = new ItemRampMarker();
 		itemRampStyler = new ItemRampStyler();
 		
-		itemRamp1 = new ItemRamp(1);
+		itemRampBase = new ItemRamp(RampRegistry.BASEID);
+		for(RampStyle s : RampRegistry.getAllStyles()){
+			if(s.getStyleID() == RampRegistry.BASEID)
+				continue;
+			itemRamps.add(new ItemRamp(s.getStyleID()));
+		}
 	}
 	
+	
+	
 	static void init(FMLInitializationEvent event){
+	}
+	
+	public static ItemRamp getItemRampOfStyle(int styleID){
+		if(styleID == RampRegistry.BASEID)
+			return itemRampBase;
+		
+		for(ItemRamp r : itemRamps){
+			if(r.getStyleID() == styleID)
+				return r;
+		}
+		return null;
 	}
 }

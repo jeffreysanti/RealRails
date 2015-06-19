@@ -1,12 +1,15 @@
 package net.jeffreysanti.mcmod.realrails.common.blocks;
 
 import scala.actors.threadpool.Arrays;
+import net.jeffreysanti.mcmod.realrails.ItemRegistry;
 import net.jeffreysanti.mcmod.realrails.RealRails;
 import net.jeffreysanti.mcmod.realrails.common.RailPiece;
 import net.jeffreysanti.mcmod.realrails.common.RailPieceGroup;
 import net.jeffreysanti.mcmod.realrails.common.RailRegistry;
 import net.jeffreysanti.mcmod.realrails.common.RampRegistry;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -47,7 +50,7 @@ public class TileEntityRail extends TileEntity {
         	if(RampRegistry.getRamp(this.rampType) == null){
             	this.rampType = 1;
             }
-            if(RampRegistry.getStyle(this.rampStyle).isEmpty()){
+            if(RampRegistry.getStyleTexture(this.rampStyle).isEmpty()){
             	this.rampStyle = 1;
             }
         }
@@ -120,7 +123,7 @@ public class TileEntityRail extends TileEntity {
     }
     
     public void setRampStyle(int i){
-    	if(!RampRegistry.getStyle(this.styleID).isEmpty()){
+    	if(!RampRegistry.getStyleTexture(this.styleID).isEmpty()){
     		rampStyle = i;
         }
     }
@@ -133,8 +136,8 @@ public class TileEntityRail extends TileEntity {
     	if(g == null)
     		return;
     	
-    	for(BlockPos bp : g.getAllTrackPieces(pos, elmID)){
-    		worldIn.setBlockToAir(bp);
+    	for(BlockPos bp : g.getAllTrackPieces(pos, elmID)){    		
+    		worldIn.destroyBlock(bp, true);
     	}
     }
     

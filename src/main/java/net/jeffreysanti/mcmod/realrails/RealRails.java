@@ -33,8 +33,8 @@ public class RealRails
     	RailRegistry.init();
     	RampRegistry.init();
     	
-    	ItemRegistry.preInit(event);
     	BlockRegistry.preInit(event);
+    	ItemRegistry.preInit(event);
     }
     
     @EventHandler
@@ -42,7 +42,9 @@ public class RealRails
     {
     	proxy.registerRenders();
     	
-    	ItemRegistry.init(event);
     	BlockRegistry.init(event);
+    	ItemRegistry.init(event);
+    	
+    	CraftingRegistry.init(event);
     }
 }
