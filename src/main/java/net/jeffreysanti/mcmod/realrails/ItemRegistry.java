@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.jeffreysanti.mcmod.realrails.common.RampRegistry;
 import net.jeffreysanti.mcmod.realrails.common.RampStyle;
+import net.jeffreysanti.mcmod.realrails.common.items.ItemRailStraight;
 import net.jeffreysanti.mcmod.realrails.common.items.ItemRamp;
 import net.jeffreysanti.mcmod.realrails.common.items.ItemRampMarker;
 import net.jeffreysanti.mcmod.realrails.common.items.ItemRampStyler;
@@ -21,6 +22,8 @@ public class ItemRegistry {
 	public static ItemRamp itemRampBase;
 	public static ArrayList<ItemRamp> itemRamps = new ArrayList();
 	
+	public static ItemRailStraight itemRailStraight;
+	
 	static void preInit(FMLPreInitializationEvent event){
 		itemTrackMarker = new ItemTrackMarker();
 		itemRampMarker = new ItemRampMarker();
@@ -32,6 +35,8 @@ public class ItemRegistry {
 				continue;
 			itemRamps.add(new ItemRamp(s.getStyleID()));
 		}
+		
+		itemRailStraight = new ItemRailStraight(1);
 	}
 	
 	

@@ -2,16 +2,16 @@ package net.jeffreysanti.mcmod.realrails.common;
 
 public class RailPiece {
 
-	public RailPiece(String internalName, int elemID){
-		this(internalName, elemID, false, false);
+	public static enum RailPieceType{
+		RPT_STRAIGHT,
+		RPT_STRAIGHT_INCLINED
 	}
 	
 	// full constructor
-	public RailPiece(String internalName, int elemID, boolean b45_135, boolean bInclined){
+	public RailPiece(String internalName, int elemID, RailPieceType rpt){
 		this.internalName = internalName;
 		this.elemID = elemID;
-		this.b45_135 = b45_135;
-		this.bInclined = bInclined;
+		this.rpt = rpt;
 	}
 	
 	public String getName(){
@@ -30,19 +30,14 @@ public class RailPiece {
 		group = g;
 	}
 	
-	public boolean is45_135(){
-		return b45_135;
-	}
-	
 	public boolean isInclined(){
-		return bInclined;
+		return rpt == RailPieceType.RPT_STRAIGHT_INCLINED;
 	}
 	
 	
 	private String internalName;
 	private int elemID;
 	private String group;
+	private RailPieceType rpt;
 	
-	private boolean b45_135;
-	private boolean bInclined;
 }

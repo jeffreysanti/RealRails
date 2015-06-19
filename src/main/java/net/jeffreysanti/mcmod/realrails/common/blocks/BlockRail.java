@@ -221,7 +221,7 @@ public class BlockRail extends BlockContainer {
     	if(te != null && RailRegistry.getPiece(te.getRailID()) != null){
     		
     		// drop ramp
-    		if(RailRegistry.getPiece(te.getRailID()).isInclined()){
+    		if(RailRegistry.getPiece(te.getRailID()).isInclined() && !te.isMarkedForDeletion()){
     			ItemStack stack = new ItemStack(ItemRegistry.getItemRampOfStyle(te.getRampStyle()), 1);
     			worldIn.spawnEntityInWorld(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack));
     		}

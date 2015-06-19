@@ -28,6 +28,7 @@ public class TileEntityRail extends TileEntity {
 		styleID = 1;
 		rampType = 1;
     	rampStyle = 1;
+    	forDeletion = false;
 	}
 	
 	@Override
@@ -141,6 +142,12 @@ public class TileEntityRail extends TileEntity {
     	}
     }
     
+    public void markForDeletion(){
+    	forDeletion = true;
+    }
+    public boolean isMarkedForDeletion(){
+    	return forDeletion;
+    }
     
     
     private int elmID;
@@ -148,6 +155,7 @@ public class TileEntityRail extends TileEntity {
     
     private int rampType;
     private int rampStyle;
+    private boolean forDeletion;
 	
     private static final String name = "rail";
 	public static void register(){

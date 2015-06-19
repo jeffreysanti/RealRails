@@ -169,7 +169,7 @@ public class BlockRamp extends BlockContainer {
     {
     	// drop item and THEN destroy tile entity (in super method)
     	TileEntityRamp te = (TileEntityRamp)worldIn.getTileEntity(pos);
-    	if(te != null){
+    	if(te != null && !te.isMarkedForDeletion()){
     		ItemStack stack = new ItemStack(ItemRegistry.getItemRampOfStyle(te.getStyleID()), 1);
     		worldIn.spawnEntityInWorld(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack));
     	}

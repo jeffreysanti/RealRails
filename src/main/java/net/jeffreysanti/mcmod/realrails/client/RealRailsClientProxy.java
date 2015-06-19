@@ -43,5 +43,8 @@ public class RealRailsClientProxy extends RealRailsCommonProxy {
     	for(ItemRamp r : ItemRegistry.itemRamps){
     		renderItem.getItemModelMesher().register(r, 0, new ModelResourceLocation(RealRails.MODID + ":" + r.getName(), "inventory"));
 		}
+    	
+    	renderItem.getItemModelMesher().register(ItemRegistry.itemRailStraight, 0, new ModelResourceLocation(RealRails.MODID + ":" + ItemRegistry.itemRailStraight.getName(), "inventory"));
+
 	}
 }

@@ -22,6 +22,7 @@ public class TileEntityRamp extends TileEntity {
 		
 		typeID = 1;
 		styleID = 1;
+		forDeletion = false;
 	}
 	
 	@Override
@@ -89,10 +90,17 @@ public class TileEntityRamp extends TileEntity {
         }
     }
     
+    public void markForDeletion(){
+    	forDeletion = true;
+    }
+    public boolean isMarkedForDeletion(){
+    	return forDeletion;
+    }
     
     
     private int typeID;
     private int styleID;
+    private boolean forDeletion;
 	
     private static final String name = "ramp";
 	public static void register(){
