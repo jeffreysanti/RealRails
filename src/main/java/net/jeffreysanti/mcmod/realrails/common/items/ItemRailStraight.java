@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.jeffreysanti.mcmod.realrails.BlockRegistry;
 import net.jeffreysanti.mcmod.realrails.RealRails;
 import net.jeffreysanti.mcmod.realrails.common.CustomCreativeTabs;
+import net.jeffreysanti.mcmod.realrails.common.RailPieceGroup.BlockRailPieceGroup;
 import net.jeffreysanti.mcmod.realrails.common.RailRegistry;
 import net.jeffreysanti.mcmod.realrails.common.RampPiece;
 import net.jeffreysanti.mcmod.realrails.common.RampPiece.FACING;
@@ -34,16 +35,6 @@ public class ItemRailStraight extends Item {
 		ST_NS_90,
 		ST_NW_135,
 		ST_NE_45
-	};
-	
-	public static class BlockRailPieceGroup{
-		public BlockRailPieceGroup(BlockPos p, String railPiece){
-			this.p = p;
-			this.railPiece = railPiece;
-		}
-		
-		public String railPiece;
-		public BlockPos p;
 	};
 	
 	
@@ -294,6 +285,7 @@ public class ItemRailStraight extends Item {
 		}
 		te.syncTileEntity();
 	}
+	
 	
 	
 	

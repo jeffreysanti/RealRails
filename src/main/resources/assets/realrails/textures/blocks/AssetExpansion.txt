@@ -1,0 +1,44 @@
+One tool which helps for creating rail tiles is ImageMagick:
+
+* Create a 3x3 rail tile (ie: align rail)
+* Export the 48x48 pixel rail segment whole
+* Use convert to split
+
+ie:
+
+convert align_90_east.png -crop 3x3@ +repage -colorspace srgb align_90_east_%d.png
+
+Will create the following tiles:
+
+align_90_east_0.png
+align_90_east_1.png
+align_90_east_2.png
+align_90_east_3.png
+align_90_east_4.png
+align_90_east_5.png
+align_90_east_6.png
+align_90_east_7.png
+align_90_east_8.png
+
+With Layout
+
+
+|-----|-----|-----|
+|     |     |     |
+|  0  |  1  |  2  |
+|     |     |     |
+|-----|-----|-----|
+|     |     |     |
+|  3  |  4  |  5  |
+|     |     |     |
+|-----|-----|-----|
+|     |     |     |
+|  6  |  7  |  8  |
+|     |     |     |
+|-----|-----|-----|
+
+
+
+** NOTE: Blank sections of the map will be converted to grayscale by ImageMagick.
+** In Minecraft these will show up as solid black, so the textures must be replaced
+** with a better png file (blank.png)

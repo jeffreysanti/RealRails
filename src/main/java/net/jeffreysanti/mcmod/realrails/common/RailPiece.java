@@ -4,7 +4,9 @@ public class RailPiece {
 
 	public static enum RailPieceType{
 		RPT_STRAIGHT,
-		RPT_STRAIGHT_INCLINED
+		RPT_STRAIGHT_INCLINED,
+		
+		RPT_ALIGN
 	}
 	
 	// full constructor

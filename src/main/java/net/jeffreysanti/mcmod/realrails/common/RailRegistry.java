@@ -45,6 +45,30 @@ public class RailRegistry {
 		railToList(new RailPiece("inc_90_b", 14, RailPieceType.RPT_STRAIGHT_INCLINED));
 		groupToList(new RailPieceGroup("inc_90", new int[][]{ {13, 14} }));
 		
+		railToList3x3("align_90_east", 15, 23, RailPieceType.RPT_ALIGN);
+		railToList3x3("align_90_west", 24, 32, RailPieceType.RPT_ALIGN);
+		railToList3x3("align_0_north", 33, 41, RailPieceType.RPT_ALIGN);
+		railToList3x3("align_0_south", 42, 50, RailPieceType.RPT_ALIGN);
+		
+		
+		
+	}
+	
+	static protected void railToList3x3(String name, int start, int end, RailPieceType typ){
+		assert(end == start+8);
+		railToList(new RailPiece(name+"_0", start+0, typ));
+		railToList(new RailPiece(name+"_1", start+1, typ));
+		railToList(new RailPiece(name+"_2", start+2, typ));
+		railToList(new RailPiece(name+"_3", start+3, typ));
+		railToList(new RailPiece(name+"_4", start+4, typ));
+		railToList(new RailPiece(name+"_5", start+5, typ));
+		railToList(new RailPiece(name+"_6", start+6, typ));
+		railToList(new RailPiece(name+"_7", start+7, typ));
+		railToList(new RailPiece(name+"_8", start+8, typ));
+		groupToList(new RailPieceGroup(name, new int[][]{ 
+				{start+0,start+1,start+2},
+				{start+3,start+4,start+5},
+				{start+6,start+7,start+8} }));
 	}
 	
 	static protected void railToList(RailPiece r){

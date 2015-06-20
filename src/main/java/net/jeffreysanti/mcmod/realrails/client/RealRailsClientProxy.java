@@ -38,6 +38,7 @@ public class RealRailsClientProxy extends RealRailsCommonProxy {
     	renderItem.getItemModelMesher().register(ItemRegistry.itemTrackMarker, 0, new ModelResourceLocation(RealRails.MODID + ":" + ItemRegistry.itemTrackMarker.getName(), "inventory"));
     	renderItem.getItemModelMesher().register(ItemRegistry.itemRampMarker, 0, new ModelResourceLocation(RealRails.MODID + ":" + ItemRegistry.itemRampMarker.getName(), "inventory"));
     	renderItem.getItemModelMesher().register(ItemRegistry.itemRampStyler, 0, new ModelResourceLocation(RealRails.MODID + ":" + ItemRegistry.itemRampStyler.getName(), "inventory"));
+    	renderItem.getItemModelMesher().register(ItemRegistry.itemCrowbar, 0, new ModelResourceLocation(RealRails.MODID + ":" + ItemRegistry.itemCrowbar.getName(), "inventory"));
     	
     	renderItem.getItemModelMesher().register(ItemRegistry.itemRampBase, 0, new ModelResourceLocation(RealRails.MODID + ":" + ItemRegistry.itemRampBase.getName(), "inventory"));
     	for(ItemRamp r : ItemRegistry.itemRamps){
@@ -45,6 +46,7 @@ public class RealRailsClientProxy extends RealRailsCommonProxy {
 		}
     	
     	renderItem.getItemModelMesher().register(ItemRegistry.itemRailStraight, 0, new ModelResourceLocation(RealRails.MODID + ":" + ItemRegistry.itemRailStraight.getName(), "inventory"));
+    	renderItem.getItemModelMesher().register(ItemRegistry.itemRailAlign, 0, new ModelResourceLocation(RealRails.MODID + ":" + ItemRegistry.itemRailAlign.getName(), "inventory"));
 
 	}
 }

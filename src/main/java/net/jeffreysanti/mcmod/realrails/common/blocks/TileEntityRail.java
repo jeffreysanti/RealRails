@@ -5,6 +5,7 @@ import net.jeffreysanti.mcmod.realrails.ItemRegistry;
 import net.jeffreysanti.mcmod.realrails.RealRails;
 import net.jeffreysanti.mcmod.realrails.common.RailPiece;
 import net.jeffreysanti.mcmod.realrails.common.RailPieceGroup;
+import net.jeffreysanti.mcmod.realrails.common.RailPieceGroup.BlockRailPieceGroup;
 import net.jeffreysanti.mcmod.realrails.common.RailRegistry;
 import net.jeffreysanti.mcmod.realrails.common.RampRegistry;
 import net.minecraft.block.state.IBlockState;
@@ -137,8 +138,8 @@ public class TileEntityRail extends TileEntity {
     	if(g == null)
     		return;
     	
-    	for(BlockPos bp : g.getAllTrackPieces(pos, elmID)){    		
-    		worldIn.destroyBlock(bp, true);
+    	for(BlockRailPieceGroup bp : g.getAllTrackPieces(pos, elmID)){    		
+    		worldIn.destroyBlock(bp.p, true);
     	}
     }
     
